@@ -36,14 +36,16 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
 void Particle::draw(RenderTarget& target, RenderStates states) const
 {
     VertexArray lines(TriangleFan, m_numPoints + 1);
-    Vector2f center = target.mapCoordsToPixel(m_centerCoordinate, m_cartesianPlane);
+    Vector2f center = Vector2f(target.mapCoordsToPixel(m_centerCoordinate, m_cartesianPlane));
     
     lines[0].position = center;
     lines[0].color = m_color1;
 
     for (int j = 1; j < m_numPoints; j++)
     {
-        lines[j].position = target.mapCoordsToPixel(m_A(0, j - 1), m_cartesianPlane);
+        //Fix line below
+        Vector2f vertexPosition = Vector2f(target.mapCoordsToPixel(Vector2f(m_A(0, j - 1), m_A(1, j - 1)), m_cartesianPlane));
+        lines[j].position = vertexPosition;
         lines[j].color = m_color2;
 
         target.draw(lines);
