@@ -69,6 +69,18 @@ void Particle::translate(double xShift, double yShift)
 
 }
 
+void Particle::rotate(double theta)
+{
+    Vector2f temp = m_centerCoordinate;
+    translate(-m_centerCoordinate.x, -m_centerCoordinate.y);
+
+   
+    RotationMatrix R(theta);
+    m_A = R * m_A;
+
+    translate(temp.x, temp.y);
+}
+
 bool Particle::almostEqual(double a, double b, double eps)
 {
 	return fabs(a - b) < eps;
