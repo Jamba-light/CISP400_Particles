@@ -35,13 +35,39 @@ private:
 
     ///rotate Particle by theta radians counter-clockwise
     ///construct a RotationMatrix R, left mulitply it to m_A
-    void rotate(double theta);
+    void rotate(double theta)
+    {
+        Vector2f temp = m_centerCoordinate;
+        translate(-m_centerCoordinate.x, -m_centerCoordinate.y);
+
+
+        RotationMatrix R(theta);
+        m_A = R * m_A;
+
+        translate(temp.x, temp.y);
+    }
 
     ///Scale the size of the Particle by factor c
     ///construct a ScalingMatrix S, left multiply it to m_A
-    void scale(double c);
+    void scale(double c)
+    {
+        Vector2f temp = m_centerCoordinate;
+        translate(-m_centerCoordinate.x, -m_centerCoordinate.y);
+
+        ScalingMatrix S(c);
+        m_A = S * m_A;
+        translate(temp.x, temp.y);
+    }
 
     ///shift the Particle by (xShift, yShift) coordinates
     ///construct a TranslationMatrix T, add it to m_A
-    void translate(double xShift, double yShift);
+    void translate(double xShift, double yShift)
+    {
+        TranslationMatrix T(xShift, yShift, m_numPoints);
+
+        m_A = T + m_A;
+
+        m_centerCoordinate.x += xShift;
+        m_centerCoordinate.y += yShift;
+    }
 };

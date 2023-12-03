@@ -53,6 +53,7 @@ void Engine::input()
                 {
                     int numPoints = rand() % 50 + 25;
                     Particle p(m_Window, numPoints, mousePosition);
+                    m_particles.push_back(p);
                 }
             }
         }
@@ -85,9 +86,9 @@ void Engine::update(float dtAsSeconds)
 void Engine::draw()
 { 
     m_Window.clear();
-    for (size_t i = 0; i < m_particles.size(); ++i) 
-    { 
-        m_Window.draw(m_particles[i]); 
-    } 
+    for (auto& particle : m_particles)
+    {
+        m_Window.draw(particle);
+    }
     m_Window.display();
 }
