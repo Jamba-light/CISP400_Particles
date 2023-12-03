@@ -11,18 +11,18 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
     m_cartesianPlane.setSize(target.getSize().x, (-1.0) * target.getSize().y);
     m_centerCoordinate = target.mapPixelToCoords(mouseClickPosition, m_cartesianPlane);
 
-    m_vx = rand() % 500 + 100;
+    m_vx = (rand() % 2 == 0 ? 1 : -1) * (rand() % 500 + 100) ;
     m_vy = rand() % 500 + 100;
 
     m_color1 = sf::Color::White;
     m_color2 = sf::Color(rand() % 256, rand() % 256, rand() % 256);
 
-    float theta = (M_PI / 2.0) * (float)rand() / (RAND_MAX);
+    float theta = M_PI / 2.0 * (float)rand() / (RAND_MAX);
     float dtheta = 2 * M_PI / (numPoints - 1);
 
     for (int j = 0; j < numPoints; j++)
     {
-        float r = rand() % 80 + 20;
+        float r = rand() % (80 - 20) + 20;
         float dx = r * cos(theta);
         float dy = r * sin(theta);
 
