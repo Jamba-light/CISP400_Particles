@@ -9,7 +9,7 @@ namespace Matrices
 
         a.resize(rows, vector<double>(cols, 0));
 	}
-
+     
     Matrix operator+(const Matrix& a, const Matrix& b)
     {
         if (a.getCols() != b.getCols() || a.getRows() != b.getRows())
