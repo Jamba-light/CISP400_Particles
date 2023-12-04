@@ -67,7 +67,6 @@ void Engine::input()
 
 void Engine::update(float dtAsSeconds)
 {
-    unsigned int count = 0;
     for (auto i = m_particles.begin(); i != m_particles.end();)
     {
         if (i->getTTL() > 0.0)
